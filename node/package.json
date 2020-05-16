@@ -1,0 +1,40 @@
+{
+  "name": "uncertainty_demo",
+  "version": "0.0.1",
+  "description": "demo for moving object uncertainty paper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./html/index.html --target=browser",
+    "lint": "eslint . --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsohas/uncertain_demo.git"
+  },
+  "keywords": [
+    "uncertainty",
+    "gis",
+    "osm",
+    "spatial",
+    "moving",
+    "objects"
+  ],
+  "author": "Abdullah Islam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alsohas/uncertain_demo/issues"
+  },
+  "homepage": "https://github.com/alsohas/uncertain_demo#readme",
+  "dependencies": {
+    "leaflet": "^1.6.0",
+    "parcel": "^1.12.4"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.5.12",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "eslint": "^7.0.0",
+    "typescript": "^3.9.2"
+  }
+}
