@@ -1,4 +1,7 @@
 import * as L from 'leaflet';
+import {
+    TrajectoryManager
+} from './map_utils/TrajectoryManager';
 
 function addTileLayer(mMap: L.Map): void {
     // L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -13,14 +16,10 @@ function addTileLayer(mMap: L.Map): void {
     }).addTo(mMap);
 }
 
-function coordinateLogger(e: L.LeafletMouseEvent): void {
-    console.log(e.latlng);
-}
-
 function init(): void {
     const mMap = L.map('map').setView([47.608013, -122.335167], 16);
-    mMap.addEventListener('click', e => coordinateLogger(e as L.LeafletMouseEvent));
     addTileLayer(mMap);
+    new TrajectoryManager(mMap);
 }
 
 init();
