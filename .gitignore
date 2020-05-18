@@ -1,5 +1,6 @@
 #ignore shapefiles
 *.shp
+*_shp
 
 # Default ignored files
 workspace.xml
