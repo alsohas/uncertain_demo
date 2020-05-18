@@ -60,7 +60,7 @@ export class TrajectoryManager {
             body: JSON.stringify({
                 lat: coord.lat,
                 lng: coord.lng,
-                update: this.mTrajectory.length
+                dist: this.getDist()
             })
         }).catch((err) => {
             console.log('Something went wrong grabbing connected nodes');
@@ -72,5 +72,9 @@ export class TrajectoryManager {
             console.log(err);
         }); // expect connected nodes, lat long, and edges(polygon) from py server
         console.log(data);
+    }
+    private getDist(): string {
+        console.log((document.getElementById('regionSize') as HTMLInputElement).value);
+        return (document.getElementById('regionSize') as HTMLInputElement).value;
     }
 }

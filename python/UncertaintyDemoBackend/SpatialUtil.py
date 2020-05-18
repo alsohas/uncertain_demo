@@ -2,15 +2,19 @@ import osmnx as ox
 
 
 def get_connected_nodes(update: dict):
-    # {'lat': 47.6090274819287, 'lng': -122.33214602173831, 'update': 5}
-    lng = update['lng']
-    lat = update['lat']
-    dist = update['dist']
     prev_region = update.get('prevRegion', {})
+    dist = int(update['dist'])
+    lat = float(update['lat'])
+    lng = float(update['lng'])
     current_region = {}
-    graph = ox.graph_from_point((lat, lng), network_type='drive', simplify=True, truncate_by_edge=True, distance=dist)
+    graph = ox.graph_from_point((lat, lng), distance=dist, network_type='drive', simplify=True, truncate_by_edge=True)
     nearest_node = ox.get_nearest_node(graph, (lat, lng))
 
+    # TODO: For multi-step predictive paths, recursively add source nodes to the dict with child node dicts
+    # that represent the outgoing edges. Then we can draw the edges for each edge one at a time by iterating through
+    # the dictionary (first level is the source nodes), and the sub dictionary (second level would be outgoing edges)
+    # TODO: somehow need to keep track of which level of prediction we're at - likely in the frontend side.
+    # This is needed to differentiate between the very previous and next step for the set difference.
     for e in graph.edges:
         if e[0] != nearest_node and e[1] != nearest_node:
             continue
@@ -32,12 +36,12 @@ def get_connected_nodes(update: dict):
             }
         current_region[source.get('osmid')] = possible_path
 
-    print(current_region)
+    return current_region
 
 
 if __name__ == '__main__':
-    get_connected_nodes({
+    print(get_connected_nodes({
         'lng': -122.335167,
         'lat': 47.608013,
         'dist': 100
-    })
+    }))
