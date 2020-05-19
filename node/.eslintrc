@@ -23,7 +23,7 @@
       "semi-spacing": ["error", {"before": false, "after": false}],
       // enforce consistent style for curly brackets
       "curly": ["error", "all"],
-      "object-curly-newline": ["error", "always"],
+      "object-curly-newline": ["error", {"consistent": true}],
       "object-curly-spacing": ["error", "never"]
 
     }
