@@ -51,7 +51,10 @@ export class LayerManger {
   public addPredictiveEdgeMarker(source: L.LatLng, destination: L.LatLng): L.Polyline {
     const polyline = new L.Polyline([source, destination,], {
       color: 'blue',
-    }).addTo(this.mMap);
+    });
+    if ((document.getElementById('showPredictive') as HTMLInputElement).checked) {
+      polyline.addTo(this.mMap);
+    }
     this.allLayers.push(polyline);
     return polyline;
   }

@@ -24,8 +24,9 @@ export class PredictiveForest {
     this.ValidEdgeMarkers = new Map();
     (document.getElementById('showPredictive') as HTMLElement).addEventListener('click', (e) => {
       if (((e.target) as HTMLInputElement).checked) {
-        // this.PredictiveEdgeMarkers.map
-        return;
+        this.PredictiveEdgeMarkers.map(e => e.addTo(mMap));
+      } else {
+        this.PredictiveEdgeMarkers.map(e => e.removeFrom(mMap));
       }
     });
   }
