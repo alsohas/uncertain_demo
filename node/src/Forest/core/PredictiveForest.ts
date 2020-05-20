@@ -16,6 +16,7 @@ export class PredictiveForest {
   PredictiveRegions!: Map<number, Map<number, Array<PredictiveNode>>>;
   ValidEdgeMarkers: Map<Array<number>, L.Polyline>;
   PredictiveEdgeMarkers: Array<L.Polyline> = [];
+  ObsoleteMarkers: Array<L.Polyline> = [];
 
   constructor(mMap: L.Map) {
     this.mMap = mMap;
@@ -27,6 +28,13 @@ export class PredictiveForest {
         this.PredictiveEdgeMarkers.map(e => e.addTo(mMap));
       } else {
         this.PredictiveEdgeMarkers.map(e => e.removeFrom(mMap));
+      }
+    });
+    (document.getElementById('showObsolete') as HTMLElement).addEventListener('click', (e) => {
+      if (((e.target) as HTMLInputElement).checked) {
+        this.ObsoleteMarkers.map(e => e.addTo(mMap));
+      } else {
+        this.ObsoleteMarkers.map(e => e.removeFrom(mMap));
       }
     });
   }
@@ -98,7 +106,7 @@ export class PredictiveForest {
   }
   private markObsoletes(): void {
     LayerManger.getInstance(this.mMap).markObsoleteNodes(
-      this.Region.ObsoleteNodes
+      this.Region.ObsoleteNodes, this.ObsoleteMarkers,
     );
     this.ValidEdgeMarkers.forEach((polyLine, idArray) => {
       if (
@@ -106,9 +114,10 @@ export class PredictiveForest {
         this.Region.ObsoleteNodes.has(idArray[1])
       ) {
         polyLine.setStyle({
-          color: 'red',
-          fillColor: 'red',
+          color: '#E58E35',
+          fillColor: '#E58E35',
         });
+        this.ObsoleteMarkers.push(polyLine);
       }
     });
   }
@@ -162,6 +171,9 @@ export class PredictiveForest {
   ): Promise<void> {
     this.Region.ObsoleteNodes = union(this.Region.ObsoleteNodes, obsoleteNodes);
     if (obsoleteNodes.size === 0) {
+      return;
+    }
+    if (steps <= 1) {
       return;
     }
     const obsoleteParents = new Set<number>();

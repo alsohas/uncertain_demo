@@ -31,9 +31,9 @@ export class LayerManger {
   public async addNewRegion(center: L.LatLng): Promise<void> {
     const circle = L.circle(center, {
       color: '#957DAD',
-      opacity: 0.4,
+      opacity: 0.7,
       fillColor: '#957DAD',
-      fillOpacity: 0.2,
+      fillOpacity: 0.1,
       radius: parseInt(getDist()),
     }).addTo(this.mMap);
     this.regionMarkers.push(circle);
@@ -42,7 +42,9 @@ export class LayerManger {
 
   public addEdgeMarker(source: L.LatLng, destination: L.LatLng): L.Polyline {
     const polyline = new L.Polyline([source, destination,], {
-      color: '#00A7EA',
+      color: '#77dd77',
+      weight: 8,
+      opacity: 0.8,
     }).addTo(this.mMap);
     this.allLayers.push(polyline);
     return polyline;
@@ -50,7 +52,9 @@ export class LayerManger {
 
   public addPredictiveEdgeMarker(source: L.LatLng, destination: L.LatLng): L.Polyline {
     const polyline = new L.Polyline([source, destination,], {
-      color: 'blue',
+      color: '#00A7EA',
+      weight: 8,
+      opacity: 0.5,
     });
     if ((document.getElementById('showPredictive') as HTMLInputElement).checked) {
       polyline.addTo(this.mMap);
@@ -77,7 +81,7 @@ export class LayerManger {
     this.pointMarker = {};
   }
 
-  public async markObsoleteNodes(nodes: Set<number>): Promise<void> {
+  public async markObsoleteNodes(nodes: Set<number>, obsoleteMarker: Array<L.Layer>): Promise<void> {
     nodes.forEach((nodeID) => {
       this.allLayers.forEach((layer: L.Layer) => {
         if (typeof (layer as CustomMarker).nodeID !== 'undefined') {
@@ -86,6 +90,7 @@ export class LayerManger {
               fillColor: '#E58E35',
               color: '#E58E35',
             });
+            obsoleteMarker.push(layer);
           }
         }
       });
