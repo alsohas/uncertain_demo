@@ -22,19 +22,24 @@
                 <fieldset>
                     <label for="nameField">Predictive Steps</label>
                     <input type="number" placeholder="# of Steps" id="predictiveSteps" value="2">
-                
+
                     <label for="nameField">Region Size</label>
                     <input type="number" placeholder="Region Size" id="regionSize" value="100">
-                    <button onclick="return false" id="reset_trajectory" class="button-primary">Reset Trajectory</button>
+                    <div class="float-right">
+                        <input type="checkbox" id="showPredictive">
+                        <label class="label-inline" for="showPredictive">Show Predictive Routed</label>
+                    </div>
+                    <button onclick="return false" id="reset_trajectory" class="button-primary">Reset
+                        Trajectory</button>
                 </fieldset>
             </form>
         </div>
     </div>
 </body>
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
 <link rel="stylesheet" type="text/css" href="../css/index.css">
 
 <script src="../src/index.ts"></script>

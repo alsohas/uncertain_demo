@@ -86,7 +86,7 @@ class SpatialUtil:
         for node_id in current_region_graph_no_edges:
             self._build_predictive_regions(current_region_graph_edges, node_id, kept_nodes, deleted_nodes)
 
-        return deleted_nodes_current
+        return deleted_nodes
 
 
 if __name__ == '__main__':

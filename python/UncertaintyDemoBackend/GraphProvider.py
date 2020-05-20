@@ -1,12 +1,13 @@
 import osmnx as ox
 
 
-class GraphProvider:
+class _GraphProvider:
     def __init__(self, distance=10_000, folder='./'):
         self.location = 'Seattle, USA'
         self.distance = distance
         self.folder = folder
         self.graph = None
+        self.graph = self._load_graph()
 
     def download_graph(self):
         dist = self.distance
@@ -18,7 +19,7 @@ class GraphProvider:
         self.graph = graph
 
     @staticmethod
-    def load_graph():
+    def _load_graph():
         graph = ox.load_graphml(filename=f'graph.shp', folder='./')
         return graph
 
@@ -32,6 +33,8 @@ class GraphProvider:
         ox.plot_graph(graph)
 
 
+GraphProvider = _GraphProvider()
+
 if __name__ == '__main__':
-    gp = GraphProvider()
-    gp.show_graph(gp.load_graph())
+    gp = GraphProvider
+    gp.show_graph(gp.graph)

@@ -1,9 +1,13 @@
 import * as L from 'leaflet';
 
 export class CustomMarker extends L.CircleMarker {
-    customID: number | undefined;
-    constructor(latLng: L.LatLng, options?: L.CircleMarkerOptions, customID?: number) {
-        super(latLng, options);
-        this.customID = customID;
-    }
+  nodeID: number;
+  constructor(
+    latLng: L.LatLng,
+    nodeID: number,
+    options?: L.CircleMarkerOptions
+  ) {
+    super(latLng, options);
+    this.nodeID = nodeID;
+  }
 }

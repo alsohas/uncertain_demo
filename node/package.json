@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./html/index.html --target=browser",
+    "electron": "parcel ./src/main.ts --target=electron --public-url '.'",
+    "watch": "parcel watch ./src/main.ts ./html/index.html ./css/index.css --public-url .. -d ./dist/electron --target=electron",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
@@ -44,6 +46,7 @@
     "babel-preset-es2018": "^1.0.0",
     "babel-preset-esnext": "^1.1.3",
     "babel-preset-stage-0": "^6.24.1",
+    "electron": "^9.0.0",
     "eslint": "^7.0.0",
     "typescript": "^3.9.2"
   }
