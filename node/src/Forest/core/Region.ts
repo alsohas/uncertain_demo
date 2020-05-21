@@ -5,11 +5,11 @@ export class Region {
   private static instance: Region;
 
   public Regions: Map<number, Map<number, RegionalNode>>;
-  public ObsoleteNodes: Set<number>;
+  public ObsoleteNodes: Map<number, Set<number>>;
 
   private constructor() {
     this.Regions = new Map();
-    this.ObsoleteNodes = new Set();
+    this.ObsoleteNodes = new Map();
   }
 
   public static getInstance(): Region {
