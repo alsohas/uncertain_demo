@@ -42,9 +42,10 @@ export class LayerManger {
 
   public addEdgeMarker(source: L.LatLng, destination: L.LatLng): L.Polyline {
     const polyline = new L.Polyline([source, destination,], {
-      color: '#77dd77',
+      // color: '#77dd77',
+      color: 'green',
       weight: 8,
-      opacity: 0.8,
+      opacity: 0.5,
     }).addTo(this.mMap);
     this.allLayers.push(polyline);
     return polyline;
@@ -52,9 +53,10 @@ export class LayerManger {
 
   public addPredictiveEdgeMarker(source: L.LatLng, destination: L.LatLng): L.Polyline {
     const polyline = new L.Polyline([source, destination,], {
-      color: '#00A7EA',
+      // color: '#00A7EA',
+      color: 'blue',
       weight: 8,
-      opacity: 0.5,
+      opacity: 0.3,
     });
     if ((document.getElementById('showPredictive') as HTMLInputElement).checked) {
       polyline.addTo(this.mMap);
@@ -69,6 +71,7 @@ export class LayerManger {
       fillOpacity: 1,
       stroke: false,
       opacity: 1,
+      weight: 5,
     }).addTo(this.mMap);
     this.allLayers.push(marker);
     this.pointMarker[node.NodeID] = marker;
@@ -87,8 +90,11 @@ export class LayerManger {
         if (typeof (layer as CustomMarker).nodeID !== 'undefined') {
           if (nodeID === (layer as CustomMarker).nodeID) {
             (layer as CustomMarker).setStyle({
-              fillColor: '#E58E35',
-              color: '#E58E35',
+              fillColor: 'red',
+              // color: '#E58E35',
+              color: 'red',
+              opacity: 0.3,
+              weight: 8,
             });
             obsoleteMarker.push(layer);
           }
