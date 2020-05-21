@@ -9,6 +9,10 @@ export function getDist(): string {
   return (document.getElementById('regionSize') as HTMLInputElement).value;
 }
 
+export function nThPredictionChecked(): boolean {
+  return (document.getElementById('nthStepPrediction') as HTMLInputElement).checked;
+}
+
 export function addTrajectoryButton(
   mMap: L.Map,
   labelString: string,
@@ -21,6 +25,11 @@ export function addTrajectoryButton(
   btn.innerHTML = 'Add';
   btn.addEventListener('click', () => {
     TrajectoryManager.getInstance(mMap).addTrajectory(coord);
+    if (nThPredictionChecked()) {
+      const predictiveElement = document.getElementById('predictiveSteps') as HTMLInputElement;
+      const steps = predictiveElement.value;
+      predictiveElement.value = (parseInt(steps) - 1).toString();
+    }
   });
   return container;
 }
@@ -43,5 +52,20 @@ export function addListeners(mMap: L.Map): void {
       `Long: ${coord.lng}<br>` +
       'Add to trajectory? <br>';
     popup.setContent(addTrajectoryButton(mMap, label, coord));
+  });
+
+  document.getElementById('predictiveSteps')?.addEventListener('change', () => {
+    const steps = (document.getElementById('predictiveSteps') as HTMLInputElement).value;
+    let suffix!: string;
+    if (parseInt(steps) === 1) {
+      suffix = 'st';
+    } else if (parseInt(steps) === 2) {
+      suffix = 'nd';
+    } else if (parseInt(steps) === 3) {
+      suffix = 'rd';
+    } else {
+      suffix = 'th';
+    }
+    (document.getElementById('nthStepPredictionLabel') as HTMLLabelElement).textContent = `Predict ${steps}${suffix} Step`;
   });
 }
