@@ -1,7 +1,7 @@
 import { RoadNetwork, } from '../util/roadnetwork';
 import { Region, } from './Region';
 import * as L from 'leaflet';
-import { getNumPredictiveSteps, } from '../../map_utils/DomUtils';
+import { getNumPredictiveSteps, updateNodesPruned, updatePresentProbability, updatePredictiveProbability, } from '../../map_utils/DomUtils';
 import { LayerManger, } from '../../map_utils/LayerManager';
 import { intersect, union, difference, } from '../util/setops';
 import { RegionalNode, } from './RegionalNode';
@@ -140,6 +140,7 @@ export class PredictiveForest {
    */
   private markObsoletes(): void {
     const globalObsoletes = this.getGlobalObsoletes();
+    updateNodesPruned(globalObsoletes.size);
     LayerManger.getInstance(this.mMap).markObsoleteNodes(
       globalObsoletes,
       this.ObsoleteMarkers
@@ -239,6 +240,11 @@ export class PredictiveForest {
       );
       predictiveNode.Expand();
     });
+    const finalPredictiveRegion = this.PredictiveRegions.get(this.Depth);
+    if (!finalPredictiveRegion) {
+      return;
+    }
+    updatePredictiveProbability(1.0/(Math.max(finalPredictiveRegion.size, 1)));
   }
 
 
@@ -307,12 +313,15 @@ export class PredictiveForest {
     nodes: Set<number> | Array<number>,
     center: L.LatLng
   ): Promise<void> {
+    let nodeCount = 0;
     nodes.forEach((nodeID: number) => {
+      nodeCount++;
       const node = this.RoadNetwork.Nodes.get(nodeID);
       if (node) {
         LayerManger.getInstance(this.mMap).addPointMarker(node);
       }
     });
+    updatePresentProbability(1.0/nodeCount);
     LayerManger.getInstance(this.mMap).addNewRegion(center);
   }
 }

@@ -1,6 +1,6 @@
 import * as L from 'leaflet';
 import { TrajectoryManager, } from './map_utils/TrajectoryManager';
-import { addListeners, } from './map_utils/DomUtils';
+import { addListeners, updateNodesPruned, } from './map_utils/DomUtils';
 import { RoadNetwork, } from './Forest/util/roadnetwork';
 
 function addBoundingBox(mMap: L.Map): void {

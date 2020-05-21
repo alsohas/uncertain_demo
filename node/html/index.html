@@ -18,31 +18,48 @@
         <div id="controls" class="column column-15" style="margin-left: 2rem;">
             <br class="row">
             <br class="row">
-            <form class="row">
-                <fieldset>
-                    <label for="nameField">Predictive Steps</label>
-                    <input type="number" placeholder="# of Steps" id="predictiveSteps" value="2">
+            <container>
+                <form class="row">
+                    <fieldset>
+                        <label for="nameField">Predictive Steps</label>
+                        <input type="number" placeholder="# of Steps" id="predictiveSteps" value="2">
+    
+                        <label for="nameField">Region Size</label>
+                        <input type="number" placeholder="Region Size" id="regionSize" value="100">
+                        <div class="float-right">
+                            <input type="checkbox" id="showObsolete" checked>
+                            <label class="label-inline" for="showObsolete">Show Obsolete Features</label>
+                        </div>
+                        <div class="float-left">
+                            <input type="checkbox" id="showPredictive">
+                            <label class="label-inline" for="showPredictive">Show Predictive Routes</label>
+                        </div>
+                        <br>
+                        <div class="float-left">
+                            <input type="checkbox" id="nthStepPrediction">
+                            <label id="nthStepPredictionLabel" class="label-inline" for="nthStepPrediction">Predict 2nd Step</label>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <button onclick="return false" id="reset_trajectory" class="button-primary">Reset
+                            Trajectory</button>
+                    </fieldset>
+                </form>
+                <hr>
+                <span class="auxInfo">Nodes Pruned:</span>
+                <span id="nodesPruned" class="float-right auxInfo">0</span>
+                <br>
+                <br>
+                <span class="auxInfo">Present Probability:</span>
+                <span id="presentProbability" class="float-right auxInfo">0</span>
+                <br>
+                <br>
+                <span class="auxInfo">Predictive Probability:</span>
+                <span id="predictiveProbability" class="float-right auxInfo">0</span>
 
-                    <label for="nameField">Region Size</label>
-                    <input type="number" placeholder="Region Size" id="regionSize" value="100">
-                    <div class="float-right">
-                        <input type="checkbox" id="showObsolete" checked>
-                        <label class="label-inline" for="showObsolete">Show Obsolete Features</label>
-                    </div>
-                    <br>
-                    <div class="">
-                        <input type="checkbox" id="showPredictive">
-                        <label class="label-inline" for="showPredictive">Show Predictive Routes</label>
-                    </div>
-                    <div class="">
-                        <input type="checkbox" id="nthStepPrediction">
-                        <label id="nthStepPredictionLabel" class="label-inline" for="nthStepPrediction">Predict 2nd Step</label>
-                    </div>
-                    
-                    <button onclick="return false" id="reset_trajectory" class="button-primary">Reset
-                        Trajectory</button>
-                </fieldset>
-            </form>
+
+            </container>
         </div>
     </div>
 </body>

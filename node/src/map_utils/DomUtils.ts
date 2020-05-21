@@ -34,6 +34,21 @@ export function addTrajectoryButton(
   return container;
 }
 
+export function updateNodesPruned(numNode: number): void {
+  const label = document.getElementById('nodesPruned') as HTMLElement;
+  label.innerHTML = numNode.toString();
+}
+
+export function updatePresentProbability(numNode: number): void {
+  const label = document.getElementById('presentProbability') as HTMLElement;
+  label.innerHTML = numNode.toFixed(2);
+}
+
+export function updatePredictiveProbability(numNode: number): void {
+  const label = document.getElementById('predictiveProbability') as HTMLElement;
+  label.innerHTML = numNode.toFixed(2);
+}
+
 export function addListeners(mMap: L.Map): void {
   const tManager = TrajectoryManager.getInstance(mMap);
   document.getElementById('reset_trajectory')?.addEventListener('click', () => {
