@@ -18,6 +18,7 @@ export class PredictiveForest {
   PredictiveEdgeMarkers: Array<L.Polyline> = [];
   ObsoleteMarkers: Array<L.Polyline> = [];
 
+
   /**
    * Creates an instance of PredictiveForest.
    * @param {L.Map} `Leaflet.Map` object to be hooked into for GUI manipulation
@@ -130,6 +131,7 @@ export class PredictiveForest {
     this.CurrentStep++;
   }
 
+
   /**
    * Marks all obsolete nodes on the map
    *
@@ -208,6 +210,7 @@ export class PredictiveForest {
     });
   }
 
+
   /**
    * Starts the expansion of predictive trees from the latest region
    *
@@ -238,6 +241,16 @@ export class PredictiveForest {
     });
   }
 
+
+  /**
+   *
+   * Prunes a given region based on the step provided
+   * @private
+   * @param {number} steps Determines pruned region level
+   * @param {Set<number>} obsoleteNodes The nodes to be pruned
+   * @returns {Promise<void>} void
+   * @memberof PredictiveForest
+   */
   private async PruneRegions(
     steps: number,
     obsoleteNodes: Set<number>
@@ -280,6 +293,16 @@ export class PredictiveForest {
     this.PruneRegions(steps - 1, obsoleteParents);
   }
 
+
+  /**
+   * Draws the region as a circle around the center and accompanying nodes
+   *
+   * @private
+   * @param {(Set<number> | Array<number>)} nodes Nodes to mark on map
+   * @param {L.LatLng} center Region center
+   * @returns {Promise<void>}
+   * @memberof PredictiveForest
+   */
   private async drawRegion(
     nodes: Set<number> | Array<number>,
     center: L.LatLng

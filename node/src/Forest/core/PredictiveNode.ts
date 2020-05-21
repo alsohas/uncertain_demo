@@ -13,6 +13,17 @@ export class PredictiveNode {
   PredictiveEdgeMarkers: Array<L.Polyline>;
   mMap: L.Map;
 
+  /**
+   *Creates an instance of PredictiveNode.
+   * @param {NTNode} root Root node
+   * @param {number} depth Depth of node in predictive tree
+   * @param {number} maxDepth Maximum depth to expand
+   * @param {Map<number, Map<number, Array<PredictiveNode>>>} predictiveRegions Regional reference
+   * @param {Array<L.Polyline>} predictiveEdgeMarkers Edge markers reference used for showing/hiding
+   * @param {L.Map} mMap `Leaflet.Map` object for gui interaction
+   * @param {NTNode} [parent] Optional parent node
+   * @memberof PredictiveNode
+   */
   constructor(
     root: NTNode,
     depth: number,
@@ -36,6 +47,12 @@ export class PredictiveNode {
     this.AddRegionalReference();
   }
 
+  /**
+   * Adds the self to regional reference (currently unnecessary)
+   *
+   * @private
+   * @memberof PredictiveNode
+   */
   private AddRegionalReference(): void {
     let region = this.PredictiveRegions.get(this.Level);
     if (!region) {
@@ -50,6 +67,13 @@ export class PredictiveNode {
     nodeList.push(this);
   }
 
+
+  /**
+   * Recursively expands the node and following children
+   *
+   * @returns {Promise<void>}
+   * @memberof PredictiveNode
+   */
   public async Expand(): Promise<void> {
     if (this.Depth === 0 || this.MaxDepth == this.Level) {
       return;
