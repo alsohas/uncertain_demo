@@ -13,6 +13,21 @@ export function nThPredictionChecked(): boolean {
   return (document.getElementById('nthStepPrediction') as HTMLInputElement).checked;
 }
 
+export function updateNodesPruned(numNode: number): void {
+  const label = document.getElementById('nodesPruned') as HTMLElement;
+  label.innerHTML = numNode.toString();
+}
+
+export function updatePresentProbability(numNode: number): void {
+  const label = document.getElementById('presentProbability') as HTMLElement;
+  label.innerHTML = numNode.toFixed(2);
+}
+
+export function updatePredictiveProbability(numNode: number): void {
+  const label = document.getElementById('predictiveProbability') as HTMLElement;
+  label.innerHTML = numNode.toFixed(2);
+}
+
 export function addTrajectoryButton(
   mMap: L.Map,
   labelString: string,
@@ -32,21 +47,6 @@ export function addTrajectoryButton(
     }
   });
   return container;
-}
-
-export function updateNodesPruned(numNode: number): void {
-  const label = document.getElementById('nodesPruned') as HTMLElement;
-  label.innerHTML = numNode.toString();
-}
-
-export function updatePresentProbability(numNode: number): void {
-  const label = document.getElementById('presentProbability') as HTMLElement;
-  label.innerHTML = numNode.toFixed(2);
-}
-
-export function updatePredictiveProbability(numNode: number): void {
-  const label = document.getElementById('predictiveProbability') as HTMLElement;
-  label.innerHTML = numNode.toFixed(2);
 }
 
 export function addListeners(mMap: L.Map): void {

@@ -14,6 +14,14 @@ export class NTNode {
     this.IncomingEdges = new Map();
   }
 
+  /**
+   * Adds relation to all outgoing edges
+   *
+   * @param {NTNode} node
+   * @param {Edge} edge
+   * @returns {void}
+   * @memberof NTNode
+   */
   public AddOutgoingEdge(node: NTNode, edge: Edge): void {
     if (!(node.NodeID in this.OutgoingEdges)) {
       this.OutgoingEdges.set(node, edge);
@@ -24,6 +32,14 @@ export class NTNode {
     node.AddIncomingEdge(this, edge);
   }
 
+  /**
+   * Adds relation to all incoming edges
+   *
+   * @param {NTNode} node
+   * @param {Edge} edge
+   * @returns {void}
+   * @memberof NTNode
+   */
   public AddIncomingEdge(node: NTNode, edge: Edge): void {
     if (!(node.NodeID in this.IncomingEdges)) {
       this.IncomingEdges.set(node, edge);

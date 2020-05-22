@@ -6,6 +6,12 @@ export class Edge {
   Destination: NTNode;
   EdgeID: number;
 
+  /**
+   *Creates an instance of Edge.
+   * @param {NTNode} source
+   * @param {NTNode} destination
+   * @memberof Edge
+   */
   constructor(source: NTNode, destination: NTNode) {
     this.Source = source;
     this.Destination = destination;
