@@ -1,4 +1,4 @@
-from UncertaintyDemoBackend.GraphProvider import GraphProvider
+from GraphProvider import GraphProvider
 
 
 class RoadNetworkUtil:

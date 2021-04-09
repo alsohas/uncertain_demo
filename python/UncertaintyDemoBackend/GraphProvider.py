@@ -7,26 +7,28 @@ class _GraphProvider:
         self.distance = distance
         self.folder = folder
         self.graph = None
-        self.graph = self._load_graph()
+        try:
+            self.graph = self._load_graph()
+        except:
+            self.download_graph()
 
     def download_graph(self):
         dist = self.distance
         location = self.location
-        folder = self.folder
-        graph = ox.graph_from_address(location, network_type='drive', distance=dist, truncate_by_edge=True)
+        graph = ox.graph_from_address(location, network_type='drive', dist=dist, truncate_by_edge=True)
 
-        ox.save_graphml(graph, filename=f'graph.shp', folder=folder)
+        ox.save_graphml(graph, f'graph.shp')
         self.graph = graph
 
     @staticmethod
     def _load_graph():
-        graph = ox.load_graphml(filename=f'graph.shp', folder='./')
+        graph = ox.load_graphml(f'graph.shp')
         return graph
 
     @staticmethod
     def truncate(graph, lat, lng, distance, edges=False):
-        north, south, east, west = ox.bbox_from_point((lat, lng), distance)
-        return ox.truncate_graph_bbox(graph, north, south, east, west, retain_all=True, truncate_by_edge=edges)
+        north, south, east, west = ox.utils_geo.bbox_from_point((lat, lng), dist=distance)
+        return ox.truncate.truncate_graph_bbox(graph, north, south, east, west, retain_all=True, truncate_by_edge=edges)
 
     @staticmethod
     def show_graph(graph):
